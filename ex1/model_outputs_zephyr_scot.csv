@@ -1,0 +1,701 @@
+task_id,prompt,problem,sample_id,passed,cot,code
+1,"Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].
+
+Write a Python function named `min_cost` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",min_cost,0,False,Here is the solution for the problem:,"def min_cost(cost):\n    m, n = len(cost), len(cost[0])\n    dp = [[float('inf')] * n for _ in range(m)]\n    dp[0][0] = cost[0][0]\n    for i in range(1, m):\n        dp[i][0] = min(dp[i-1][0], dp[i-1][1:] + cost[i][0])\n    for j in range(1, n):\n        dp[0][j] = min(dp[0][j-1], dp[0][j-1] + cost[0][j])\n    for i in range(1, m):\n        for j in range(1, n):\n            dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1] + cost[i][j])\n    return dp[m-1][n-1]"
+1,"Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].
+
+Write a Python function named `min_cost` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",min_cost,1,False,Here is the solution to the problem:,"def min_cost(cost):\n    m, n = len(cost), len(cost[0])\n    dp = [[float('inf')] * n for _ in range(m)]\n    dp[0][0] = cost[0][0]\n    for i in range(1, m):\n        dp[i][0] = min(dp[i-1][0], dp[i-1][1:] + cost[i][0])\n    for j in range(1, n):\n        dp[0][j] = min(dp[0][j-1], dp[0][j-1] + cost[0][j])\n    for i in range(1, m):\n        for j in range(1, n):\n            dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1] + cost[i][j])\n    return dp[m-1][n-1]"
+1,"Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].
+
+Write a Python function named `min_cost` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",min_cost,2,False,,"def min_cost(cost):\n    # Initialize minimum cost as infinity\n    min_cost = float('inf')\n    \n    # Iterate through each cell in the cost matrix\n    for i in range(len(cost)):\n        for j in range(len(cost[0])):\n            # Calculate the cost of reaching this cell\n            current_cost = cost[i][j]\n            \n            # Iterate backwards through the cost matrix to find the minimum cost path\n            for k in range(j-1, -1, -1):\n                for l in range(i-1, -1, -1):\n                    # Update the minimum cost if a lower cost path is found\n                    min_cost = min(min_cost, current_cost + cost[l][k])\n    \n    # Return the minimum cost\n    return min_cost"
+1,"Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].
+
+Write a Python function named `min_cost` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",min_cost,3,False,,
+1,"Write a function to find the minimum cost path to reach (m, n) from (0, 0) for the given cost matrix cost[][] and a position (m, n) in cost[][].
+
+Write a Python function named `min_cost` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",min_cost,4,False,,"def min_cost(cost):\n    # Initialize minimum cost as infinity\n    min_cost = float('inf')\n    \n    # Iterate through each cell in the cost matrix\n    for i in range(len(cost)):\n        for j in range(len(cost[0])):\n            # Calculate the cost of reaching this cell\n            current_cost = cost[i][j]\n            \n            # Consider the minimum cost path to reach this cell from the top-left cell\n            # We can only move right or down from the top-left cell\n            min_cost_right = min_cost[i-1][j] + current_cost if i > 0 and j > 0 else float('inf')\n            min_cost_down = min_cost[i][j-1] + current_cost if i > 0 and j < len(cost[0])-1 else float('inf')\n            \n            # Update the minimum cost if necessary\n            min_cost = min(min_cost, min_cost_right, min_cost_down)\n    \n    # Return the minimum cost\n    return min_cost"
+2,"Write a function to find the similar elements from the given two tuple lists.
+
+Write a Python function named `similar_elements` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",similar_elements,0,False,"Structured Chain of Thought:\n1. Define a function named `similar_elements` that takes two arguments: `list1` and `list2`.\n2. Initialize an empty dictionary named `dict_count`.\n3. Iterate over each element in `list1` and `list2` using a for loop.\n4. For each element, check if it is in `dict_count`.\n5. If it is, increment its count by 1.\n6. If it is not, add it to `dict_count` with a count of 1.\n7. After the loop, find the top 3 elements with the highest counts in `dict_count`.\n8. Create a new list named `similar_elements_list` and append the top 3 elements to it.\n9. Return `similar_elements_list`.\n\nPython:","def similar_elements(list1, list2):\n    dict_count = {}\n    for element in list1 + list2:\n        if element in dict_count:\n            dict_count[element] += 1\n        else:\n            dict_count[element] = 1\n    top_three = sorted(dict_count.items(), key=lambda x: x[1], reverse=True)[:3]\n    similar_elements_list = [element for element, count in top_three]\n    return similar_elements_list"
+2,"Write a function to find the similar elements from the given two tuple lists.
+
+Write a Python function named `similar_elements` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",similar_elements,1,False,,"def similar_elements(list1, list2):\n    Structured Chain of Thought:\n    1. Initialize an empty dictionary to store the similarities.\n    2. Iterate through each element in list1.\n    3. For each element in list1, check if it exists in list2.\n    4. If the element exists in list2, check if the value of the element in list1 is equal to the value of the element in list2.\n    5. If the values are equal, add the element and its value to the dictionary with a key of the concatenated list of the two lists as the value.\n    6. Return the dictionary with the similarities."
+2,"Write a function to find the similar elements from the given two tuple lists.
+
+Write a Python function named `similar_elements` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",similar_elements,2,False,"Structured Chain of Thought:\n1. Define a function named `similar_elements` that takes two parameters: `list1` and `list2`.\n2. Initialize an empty dictionary named `dict_count`.\n3. Iterate over each element in `list1` and `list2` using a for loop.\n4. For each element, check if it is in `dict_count`.\n5. If it is, increment its count by 1.\n6. If it is not, add it to `dict_count` with a count of 1.\n7. After iterating over both lists, find the elements with the highest count in `dict_count`.\n8. Return a list of these elements.\n\nPython:","def similar_elements(list1, list2):\n    dict_count = {}\n    \n    for element in list1 + list2:\n        if element in dict_count:\n            dict_count[element] += 1\n        else:\n            dict_count[element] = 1\n    \n    max_count = max(dict_count.values())\n    \n    return [key for key, value in dict_count.items() if value == max_count]"
+2,"Write a function to find the similar elements from the given two tuple lists.
+
+Write a Python function named `similar_elements` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",similar_elements,3,False,"Structured Chain of Thought:\n1. Define a function named `similar_elements` that takes two parameters: `list1` and `list2`.\n2. Initialize an empty dictionary named `dict_count`.\n3. Iterate over each element in `list1` and `list2` using a for loop.\n4. For each element, check if it is in `dict_count`.\n5. If it is, increment its count in `dict_count` by 1.\n6. If it is not, add it to `dict_count` with a count of 1.\n7. After iterating over both lists, find the top 3 elements with the highest count in `dict_count`.\n8. Return these 3 elements as a list.\n\nPython:","def similar_elements(list1, list2):\n    dict_count = {}\n    \n    for element in list1 + list2:\n        if element in dict_count:\n            dict_count[element] += 1\n        else:\n            dict_count[element] = 1\n    \n    sorted_dict = sorted(dict_count.items(), key=lambda x: x[1], reverse=True)\n    \n    return [element for element, count in sorted_dict[:3]]"
+2,"Write a function to find the similar elements from the given two tuple lists.
+
+Write a Python function named `similar_elements` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",similar_elements,4,False,"Structured Chain of Thought:\n1. Define a function named `similar_elements` that takes two parameters: `list1` and `list2`.\n2. Initialize an empty dictionary named `dict_count`.\n3. Iterate over each element in `list1` and `list2` using a for loop.\n4. For each element, check if it is in `dict_count`.\n5. If it is, increment its count by 1.\n6. If it is not, add it to `dict_count` with a count of 1.\n7. After iterating over both lists, find the top 3 elements with the highest count in `dict_count`.\n8. Return these 3 elements as a list.\n\nPython:","def similar_elements(list1, list2):\n    dict_count = {}\n    \n    for element in list1 + list2:\n        if element in dict_count:\n            dict_count[element] += 1\n        else:\n            dict_count[element] = 1\n    \n    sorted_dict = sorted(dict_count.items(), key=lambda x: x[1], reverse=True)\n    \n    return [element for element, count in sorted_dict[:3]]"
+3,"Write a python function to identify non-prime numbers.
+
+Write a Python function named `is_not_prime` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",is_not_prime,0,False,"Structured Chain of Thought:\n1. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.\n2. To identify non-prime numbers, we can iterate through all numbers from 2 to n (where n is the input number) and check if each number is divisible by any number from 2 to the square root of n.\n3. If a number is divisible by any other number, it is not a prime number.\n4. We can use the `math.sqrt()` function to calculate the square root of n.\n5. If a number is not divisible by any other number, it is a prime number.\n\nPython:","import math\n\ndef is_not_prime(n):\n    for i in range(2, math.isqrt(n) + 1):\n        if n % i == 0:\n            return False\n    return True"
+3,"Write a python function to identify non-prime numbers.
+
+Write a Python function named `is_not_prime` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",is_not_prime,1,False,"Structured Chain of Thought:\n1. Define a function named `is_not_prime`.\n2. The function should take one argument, `n`, which is the number to be checked.\n3. Inside the function, we need to check if `n` is less than 2. If it is, return `False` because numbers less than 2 are not prime.\n4. Then, we need to check if `n` is equal to 2. If it is, return `True` because 2 is a prime number.\n5. If `n` is greater than 2, we need to check if `n` is a multiple of 2. If it is, return `False` because even numbers greater than 2 are not prime.\n6. Finally, we need to check if `n` is a multiple of any odd number from 3 to the square root of `n`. If it is, return `False`. Otherwise, return `True`.\n\nPython:","def is_not_prime(n):\n    if n < 2:\n        return False\n    elif n == 2:\n        return True\n    elif n % 2 == 0:\n        return False\n    else:\n        for i in range(3, int(n**0.5)+1, 2):\n            if n % i == 0:\n                return False\n        return True"
+3,"Write a python function to identify non-prime numbers.
+
+Write a Python function named `is_not_prime` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",is_not_prime,2,False,"Structured Chain of Thought:\n1. Define a function named `is_not_prime` that takes an integer as an argument.\n2. Check if the given integer is less than 2. If true, return `False` because prime numbers are greater than 1.\n3. Check if the given integer is equal to 2 (the only even prime number). If true, return `True` because 2 is a prime number.\n4. Check if the given integer is an even number. If true, return `False` because even numbers other than 2 are not prime numbers.\n5. If none of the above conditions are met, check if the given integer is a multiple of 2. If true, return `False` because multiples of 2 are not prime numbers.\n6. If none of the above conditions are met and the given integer is greater than 2, check if the given integer is a multiple of 3. If true, return `False` because multiples of 3 are not prime numbers.\n7. If none of the above conditions are met and the given integer is greater than 2, check if the given integer is a multiple of any odd number from 5 to the square root of the given integer. If true, return `False` because numbers that are multiples of odd numbers other than 3 are not prime numbers.\n8. If none of the above conditions are met and the given integer is greater than 2, return `True` because the given integer is a prime number.\n\nPython:","def is_not_prime(n):\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n % 2 == 0:\n        return False\n    if n % 2 == 0:\n        return False\n    if n % 2 == 0:\n        return False\n    if n % 3 == 0:\n        return False\n    for i in range(5, int(n**0.5)+1, 2):\n        if n % i == 0:\n            return False\n    return True"
+3,"Write a python function to identify non-prime numbers.
+
+Write a Python function named `is_not_prime` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",is_not_prime,3,False,"Structured Chain of Thought:\n1. A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself. \n2. To identify non-prime numbers, we can iterate through all numbers from 2 to a given number (let's say n) and check if each number is divisible by any number from 2 to the square root of n. \n3. If we find a number that is divisible by another number, we can conclude that it is not a prime number.\n4. We can use a helper function `is_prime` to check if a number is prime or not.\n\nPython:","def is_prime(num):\n    if num <= 1:\n        return False\n    elif num <= 3:\n        return True\n    elif num % 2 == 0 or num % 3 == 0:\n        return False\n    i = 5\n    while i * i <= num:\n        if num % i == 0 or num % (i + 2) == 0:\n            return False\n        i += 6\n    return True\n\ndef is_not_prime(n):\n    for num in range(2, n):\n        if is_prime(num):\n            if is_prime(n // num):\n                return True\n    return False"
+3,"Write a python function to identify non-prime numbers.
+
+Write a Python function named `is_not_prime` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",is_not_prime,4,False,"Structured Chain of Thought:\n1. Define a function named `is_not_prime` that takes an integer as an argument.\n2. Check if the input integer is less than 2. If true, return `False` because prime numbers are greater than 1.\n3. Check if the input integer is equal to 2. If true, return `True` because 2 is a prime number.\n4. Check if the input integer is equal to 2 and return `True` because 2 is a prime number.\n5. Check if the input integer is a multiple of 2. If true, return `False` because even numbers other than 2 are not prime numbers.\n6. Check if the input integer is a multiple of 3. If true, return `False` because multiples of 3 are not prime numbers.\n7. Check if the input integer is a multiple of 5. If true, return `False` because multiples of 5 are not prime numbers.\n8. Check if the input integer is a multiple of both 7 and 11. If true, return `False` because multiples of 7 and 11 are not prime numbers.\n9. If none of the above conditions are met, return `True` because the input integer is a prime number.\n\nPython:",def is_not_prime(n):\n    if n < 2:\n        return False\n    if n == 2:\n        return True\n    if n == 2 and n > 1:\n        return True\n    if n % 2 == 0:\n        return False\n    if n % 3 == 0:\n        return False\n    if n % 5 == 0:\n        return False\n    if n % 7 == 0 and n % 11 == 0:\n        return False\n    return True
+4,"Write a function to find the largest integers from a given list of numbers using heap queue algorithm.
+
+Write a Python function named `heap_queue_largest` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",heap_queue_largest,0,False,,"import heapq\n\ndef heap_queue_largest(numbers):\n    # Create a heap queue with the given list of numbers\n    heapq_numbers = []\n    for num in numbers:\n        heapq_numbers.append(num)\n        \n    # Use the heap queue algorithm to find the largest numbers\n    largest_numbers = heapq.nlargest(len(heapq_numbers), heapq_numbers)\n    \n    # Return the largest numbers\n    return largest_numbers"
+4,"Write a function to find the largest integers from a given list of numbers using heap queue algorithm.
+
+Write a Python function named `heap_queue_largest` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",heap_queue_largest,1,False,,
+4,"Write a function to find the largest integers from a given list of numbers using heap queue algorithm.
+
+Write a Python function named `heap_queue_largest` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",heap_queue_largest,2,False,,"import heapq\n\ndef heap_queue_largest(numbers):\n    # Create a heap queue with the given numbers\n    heapq.heapify(numbers)\n    \n    # While there are still numbers in the heap queue\n    while numbers:\n        # Remove the smallest number from the heap queue\n        smallest = heapq.heappop(numbers)\n        \n        # Print the removed number\n        print(smallest)\n        \n        # If there are more numbers in the heap queue\n        # Add the next largest number to the heap queue\n        if numbers and numbers[1] > numbers[0]:\n            heapq.heappush(numbers, numbers[1])\n        else:\n            heapq.heappush(numbers, numbers[0])"
+4,"Write a function to find the largest integers from a given list of numbers using heap queue algorithm.
+
+Write a Python function named `heap_queue_largest` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",heap_queue_largest,3,False,,"import heapq\n\ndef heap_queue_largest(numbers):\n    # Create a heap queue with the given list of numbers\n    heapq_numbers = []\n    for num in numbers:\n        heapq_numbers.append(num)\n        \n    # Use the heap queue to find the largest numbers\n    largest_numbers = heapq.nlargest(len(numbers), heapq_numbers)\n    \n    # Return the largest numbers\n    return largest_numbers"
+4,"Write a function to find the largest integers from a given list of numbers using heap queue algorithm.
+
+Write a Python function named `heap_queue_largest` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",heap_queue_largest,4,False,,"import heapq\n\ndef heap_queue_largest(numbers):\n    # Create a heap queue with the given list of numbers\n    heapq_numbers = []\n    for num in numbers:\n        heapq_numbers.append(num)\n        \n    # Use the heap queue algorithm to find the largest numbers\n    largest_numbers = heapq.nlargest(len(heapq_numbers), heapq_numbers)\n    \n    # Return the largest numbers\n    return largest_numbers"
+5,"Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.
+
+Write a Python function named `count_ways` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",count_ways,0,False,,"count_ways(3, 5)"
+5,"Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.
+
+Write a Python function named `count_ways` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",count_ways,1,False,Here is the solution for the problem:,"def count_ways(board_size, board_depth):\n    # Initialize the count of ways to 0\n    count = 0\n    \n    # Define the number of possible moves for a 2x1 domino\n    moves = 2\n    \n    # Define the dimensions of the board\n    board_width = board_size * board_depth\n    \n    # Loop through each cell in the board\n    for i in range(board_width):\n        # Get the current cell's row and column\n        row, col = divmod(i, board_depth)\n        \n        # If the current cell is empty, increment the count of ways\n        if board[row][col] == 0:\n            count += 1\n        \n        # If the current cell is not empty, calculate the number of ways to fill it\n        else:\n            # Calculate the number of empty cells in the row\n            empty_cells_in_row = board_depth - board[row][:col]\n            \n            # Calculate the number of empty cells in the column\n            empty_cells_in_column = board_width - board[row][col+1:]\n            \n            # Calculate the number of ways to fill the current cell\n            ways = empty_cells_in_row * empty_cells_in_column\n            \n            # Add the calculated ways to the count of ways\n            count += ways\n    \n    # Return the final count of ways\n    return count"
+5,"Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.
+
+Write a Python function named `count_ways` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",count_ways,2,False,"---\n\nStructured Chain of Thought:\n1. The problem is asking to find the number of ways to fill a 3xn board with 2x1 dominoes.\n2. This is a combinatorial problem, so we need to use a method that calculates combinations.\n3. We can use the concept of dynamic programming to solve this problem efficiently.\n4. We will create a 3xn matrix to store the number of ways to fill each cell in the board.\n5. We will initialize the first row and the first column of the matrix to 1, because there is only one way to fill a single cell.\n6. We will fill the rest of the matrix using the following recurrence relation:\n   - number of ways to fill cell (i, j) = number of ways to fill cell (i-1, j) + number of ways to fill cell (i, j-1)\n   - This relation ensures that we are not counting the same cell multiple times.\n7. Finally, we will return the value in the bottom-right cell of the matrix, which represents the total number of ways to fill the 3xn board with 2x1 dominoes.\n\nPython:","def count_ways(n):\n    # Initialize the matrix with zeros\n    dp = [[0 for _ in range(n+1)] for _ in range(3+n)]\n    \n    # Initialize the first row and the first column\n    for i in range(3):\n        dp[i][0] = 1\n    for j in range(n+1):\n        dp[0][j] = 1\n    \n    # Fill the rest of the matrix\n    for i in range(1, 3+n):\n        for j in range(1, n+1):\n            dp[i][j] = dp[i-1][j] + dp[i][j-1]\n    \n    # Return the value in the bottom-right cell\n    return dp[3+n][n]"
+5,"Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.
+
+Write a Python function named `count_ways` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",count_ways,3,False,"Structured Chain of Thought:\n1. The problem is asking for the number of ways to fill a 3xn board with 2x1 dominoes.\n2. This is a combinatorics problem, specifically a permutation problem.\n3. We can use the concept of permutations to solve this problem.\n4. Python's built-in library `itertools` provides the function `permutations` to find all possible permutations of a given list.\n5. We can generate all possible permutations of the first row of the board, then for each permutation, we can generate all possible permutations of the second row, and so on.\n6. We can use nested loops to iterate over each row and column of the board, and for each cell, we can generate all possible permutations and count the number of ways to fill the board.\n7. We can store the count of each permutation in a dictionary and return the dictionary as the final result.\n\nPython:\n```python\nimport itertools\n\ndef count_ways(board_size, num_rows):\n    # Initialize an empty dictionary to store the count of each permutation\n    permutation_count = {}\n\n    # Generate all possible permutations of the first row\n    row1_permutations = list(itertools.permutations(range(1, board_size*board_size+1)))\n\n    # For each permutation of the first row, generate all possible permutations of the second row\n    for row1_perm in row1_permutations:\n        row2_permutations = []\n        for _ in range(board_size):\n            row2_permutations.append(list(itertools.permutations(range(1, board_size*board_size+1))))\n        # For each permutation of the second row, generate all possible permutations of the third row and so on\n        for row3_perm in itertools.permutations(range(1, board_size*board_size+1)):\n            for row4_perm in itertools.permutations(range(1, board_size*board_size+1)):\n                # Create a 2D array to represent the board\n                board = [[0]*board_size for _ in range(num_rows)]\n                # Fill the board with the given number of 2x1 dominoes",
+5,"Write a function to find the number of ways to fill it with 2 x 1 dominoes for the given 3 x n board.
+
+Write a Python function named `count_ways` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",count_ways,4,False,"Structured Chain of Thought:\n1. The problem is asking for the number of ways to fill a 3xn board with 2x1 dominoes.\n2. This is a combinatorics problem, which involves counting the number of ways to fill a container with a certain number of items.\n3. The container in this case is a 3xn board, and the items are 2x1 dominoes.\n4. We can use dynamic programming to solve this problem efficiently.\n5. We will create a 3xn matrix to store the number of ways to fill each cell in the board.\n6. The first row and first column of the matrix will be initialized to 1, as there is only one way to fill these cells (i.e., not placing a domino).\n7. For each cell in the matrix, we will calculate the number of ways to fill it by adding the number of ways to fill the cell above it and the cell to its left.\n8. The final answer will be the value in the bottom-right cell of the matrix.\n\nPython:","def count_ways(n):\n    # Initialize the matrix with zeros\n    dp = [[0 for _ in range(n+1)] for _ in range(3+n)]\n    \n    # Set the first row and first column to 1\n    dp[0][0] = 1\n    \n    # Fill the rest of the matrix using dynamic programming\n    for i in range(1, n+1):\n        for j in range(1, 3+n):\n            dp[j][i] = dp[j-1][i] + dp[j][i-1]\n    \n    # The answer is in the bottom-right cell of the matrix\n    return dp[3*n][n]"
+6,"Write a python function to check whether the two numbers differ at one bit position only or not.
+
+Write a Python function named `differ_At_One_Bit_Pos` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",differ_At_One_Bit_Pos,0,False,"Structured Chain of Thought:\n1. The function should take two arguments, both integers.\n2. We need to check if the two numbers differ at one bit position.\n3. To do this, we can use bitwise operations.\n4. We can use the `&` operator to compare the binary representations of the two numbers.\n5. If the result of `&` is not zero, it means the two numbers differ at one bit position.\n6. We can return a boolean value to indicate the result.\n\nPython:","def differ_At_One_Bit_Pos(num1, num2):\n    # Check if both numbers are of same length\n    if len(str(num1))!= len(str(num2)):\n        return False\n    \n    # Perform bitwise AND operation on the binary representations of the two numbers\n    result = num1 & num2\n    \n    # If the result is not zero, the numbers differ at one bit position\n    if result!= 0:\n        return True\n    else:\n        return False"
+6,"Write a python function to check whether the two numbers differ at one bit position only or not.
+
+Write a Python function named `differ_At_One_Bit_Pos` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",differ_At_One_Bit_Pos,1,False,"Structured Chain of Thought:\n1. The function should take two arguments, both integers.\n2. We need to check if the two numbers differ at one bit position.\n3. To do this, we can use bitwise operations.\n4. We can use the `&` operator to compare the binary representations of the two numbers.\n5. If the result of `&` is not zero, it means that the two numbers differ at one bit position.\n6. We can return a boolean value to indicate whether the two numbers differ at one bit position or not.\n\nPython:","def differ_At_One_Bit_Pos(num1, num2):\n    # Bitwise AND operation between the two numbers\n    result = num1 & num2\n    \n    # If the result is not zero, the numbers differ at one bit position\n    if result!= 0:\n        return True\n    else:\n        return False"
+6,"Write a python function to check whether the two numbers differ at one bit position only or not.
+
+Write a Python function named `differ_At_One_Bit_Pos` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",differ_At_One_Bit_Pos,2,False,"Structured Chain of Thought:\n1. The function should take two arguments: `num1` and `num2`. Both are of integer type.\n2. We need to check if both the numbers are equal or not. If they are equal, return True.\n3. If they are not equal, check if both the numbers are different by one bit position. To do this, we can convert both numbers to binary strings and compare them.\n4. If the binary strings are equal, return True. Otherwise, return False.\n\nPython:","def differ_At_One_Bit_Pos(num1: int, num2: int) -> bool:\n    if num1 == num2:\n        return True\n    else:\n        return (num1 == (num1 << 1) & num2) or (num2 == (num2 << 1) & num1)"
+6,"Write a python function to check whether the two numbers differ at one bit position only or not.
+
+Write a Python function named `differ_At_One_Bit_Pos` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",differ_At_One_Bit_Pos,3,False,"Structured Chain of Thought:\n1. The function should take two arguments, both integers.\n2. We need to compare the two integers bit by bit.\n3. We can use the `bin()` function to convert the integer into a binary string.\n4. We can use the `zip()` function to iterate over two binary strings simultaneously.\n5. We can use the `all()` function to check if all bits in the first binary string are '1' and if all bits in the second binary string are '0'.\n6. If the condition in step 5 is True, it means the two numbers differ at one bit position only.\n7. If the condition in step 6 is False, it means the two numbers do not differ at one bit position only.\n\nPython:","def differ_At_One_Bit_Pos(num1, num2):\n    bin_str1 = bin(num1)[2:]\n    bin_str2 = bin(num2)[2:]\n    \n    return all(bit == '0' for bit in bin_str1) and all(bit == '0' for bit in bin_str2)"
+6,"Write a python function to check whether the two numbers differ at one bit position only or not.
+
+Write a Python function named `differ_At_One_Bit_Pos` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",differ_At_One_Bit_Pos,4,False,"Structured Chain of Thought:\n1. The function should take two arguments, both integers.\n2. We need to check if the two numbers have the same number of bits.\n3. If they do, we need to check if the bits are arranged in the same order.\n4. If both conditions are met, the numbers differ at one bit position.\n5. If the number of bits is different, we compare the bits of the two numbers.\n6. If the bits are different at any position, the numbers differ at one bit position.\n7. If none of the above conditions are met, the numbers are identical.\n\nPython:","def differ_At_One_Bit_Pos(num1, num2):\n    # Check if both numbers have the same number of bits\n    if len(bin(num1))!= len(bin(num2)):\n        return False\n\n    # Check if bits are arranged in the same order\n    if sorted(bin(num1))!= sorted(bin(num2)):\n        return False\n\n    # If both conditions are met, the numbers differ at one bit position\n    return True"
+7,"Write a function to find all words which are at least 4 characters long in a string by using regex.
+
+Write a Python function named `find_char_long` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_char_long,0,True,,"import re\n\ndef find_char_long(input_string):\n    # Define the regex pattern for words at least 4 characters long\n    pattern = r""\b\w{4,}\b""\n    \n    # Use re.findall() to find all matches of the pattern in the input_string\n    matches = re.findall(pattern, input_string)\n    \n    # Return the list of matches\n    return matches"
+7,"Write a function to find all words which are at least 4 characters long in a string by using regex.
+
+Write a Python function named `find_char_long` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_char_long,1,True,,"import re\n\ndef find_char_long(input_string):\n    # Define a regex pattern for words at least 4 characters long\n    pattern = r""\b\w{4,}\b""\n    \n    # Use re.findall() to find all matches of the pattern in the input_string\n    matches = re.findall(pattern, input_string)\n    \n    # Return the list of matches\n    return matches"
+7,"Write a function to find all words which are at least 4 characters long in a string by using regex.
+
+Write a Python function named `find_char_long` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_char_long,2,True,,"import re\n\ndef find_char_long(string):\n    # Define the regex pattern for words at least 4 characters long\n    pattern = r'\b\w{4,}\b'\n    \n    # Use re.findall() to find all matches of the pattern in the string\n    matches = re.findall(pattern, string)\n    \n    # Return the list of matches\n    return matches"
+7,"Write a function to find all words which are at least 4 characters long in a string by using regex.
+
+Write a Python function named `find_char_long` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_char_long,3,True,,"import re\n\ndef find_char_long(input_string):\n    # Define the regex pattern for words at least 4 characters long\n    pattern = r""\b\w{4,}\b""\n    \n    # Use re.findall() to find all matches of the pattern in the input_string\n    matches = re.findall(pattern, input_string)\n    \n    # Return the list of matches\n    return matches"
+7,"Write a function to find all words which are at least 4 characters long in a string by using regex.
+
+Write a Python function named `find_char_long` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_char_long,4,True,,"import re\n\ndef find_char_long(input_string):\n    # Define the regex pattern for words that are at least 4 characters long\n    pattern = r""\b\w{4,}\b""\n    \n    # Use the regex pattern to find all matches in the input_string\n    matches = re.findall(pattern, input_string)\n    \n    # Return the list of matches\n    return matches"
+8,"Write a function to find squares of individual elements in a list using lambda function.
+
+Write a Python function named `square_nums` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",square_nums,0,False,,square_nums = lambda lst: sum(i**2 for i in lst)
+8,"Write a function to find squares of individual elements in a list using lambda function.
+
+Write a Python function named `square_nums` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",square_nums,1,True,,"def square_nums(lst):\n    return list(map(lambda x: x**2, lst))"
+8,"Write a function to find squares of individual elements in a list using lambda function.
+
+Write a Python function named `square_nums` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",square_nums,2,False,,square_nums = lambda lst: sum(i**2 for i in lst)
+8,"Write a function to find squares of individual elements in a list using lambda function.
+
+Write a Python function named `square_nums` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",square_nums,3,True,,"def square_nums(lst):\n    return list(map(lambda x: x**2, lst))"
+8,"Write a function to find squares of individual elements in a list using lambda function.
+
+Write a Python function named `square_nums` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",square_nums,4,False,,square_nums = lambda lst: sum(i**2 for i in lst)
+9,"Write a python function to find the minimum number of rotations required to get the same string.
+
+Write a Python function named `find_Rotations` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_Rotations,0,False,,"def find_Rotations(s):\n    n = len(s)\n    # Create a list to store the rotations of the string\n    rotations = []\n    # Find the number of rotations required\n    min_rotations = float('inf')\n    # Iterate through all possible rotations\n    for i in range(n):\n        # Get the current rotation\n        rotation = s[i:] + s[:i]\n        # Check if the rotation is the same as the original string\n        if rotation == s:\n            # Update the minimum number of rotations\n            min_rotations = min(min_rotations, len(rotation))\n            # Add the rotation to the list\n            rotations.append(rotation)\n    # Return the minimum number of rotations\n    return min_rotations if min_rotations!= float('inf') else -1"
+9,"Write a python function to find the minimum number of rotations required to get the same string.
+
+Write a Python function named `find_Rotations` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_Rotations,1,False,"Structured Chain of Thought:\n1. The problem is asking to find the minimum number of rotations required to get the same string.\n2. The string can be represented as a list of characters.\n3. We can use a set to store the characters we have seen so far while iterating through the string.\n4. For each character in the string, we check if it is in the set. If it is, we add the number of rotations required to get to this character to the total count.\n5. We repeat this process until we have iterated through the entire string.\n6. Finally, we return the total count of rotations.\n\nPython:",def find_Rotations(s):\n    char_set = set()\n    total_rotations = 0\n    for char in s:\n        if char in char_set:\n            total_rotations += 1\n        char_set.add(char)\n    return total_rotations
+9,"Write a python function to find the minimum number of rotations required to get the same string.
+
+Write a Python function named `find_Rotations` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_Rotations,2,False,Here is the solution:,"def find_Rotations(s):\n    n = len(s)\n    # Create a list to store the rotations of the string\n    rotations = []\n    # Find the number of rotations required\n    min_rotations = float('inf')\n    for i in range(n):\n        # Get the rotation of the current character\n        rotation = s[i:] + s[:i]\n        # Add the rotation to the list\n        rotations.append(rotation)\n        # Update the minimum number of rotations required\n        min_rotations = min(min_rotations, len(rotation))\n    # Return the minimum number of rotations required\n    return min_rotations if min_rotations!= float('inf') else -1"
+9,"Write a python function to find the minimum number of rotations required to get the same string.
+
+Write a Python function named `find_Rotations` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_Rotations,3,False,"Structured Chain of Thought:\n1. The problem is asking to find the minimum number of rotations required to make a given string identical to another string.\n2. We can solve this problem using the concept of Levenshtein distance, which is a measure of the minimum number of single-character edits (insertions, deletions or substitutions) required to change one word into the other.\n3. We can calculate the Levenshtein distance between the two given strings and store it in a variable.\n4. We can then calculate the number of rotations required by subtracting the Levenshtein distance from the length of the first string.\n5. We can return the calculated number of rotations as the result of the function.\n\nPython:\n```python\ndef find_Rotations(str1, str2):\n    # Calculate the Levenshtein distance between the two strings\n    lev_dist = levenshtein(str1, str2)\n    \n    # Calculate the number of rotations required\n    rot_count = len(str1) - lev_dist\n    \n    # Return the number of rotations\n    return rot_count\n\ndef levenshtein(str1, str2):\n    # Calculate the Levenshtein distance between two strings using dynamic programming\n    size_x = len(str1) + 1\n    size_y = len(str2) + 1\n    matrix = [[0 for _ in range(size_y)] for _ in range(size_x)]\n    \n    for x in range(size_x):\n        matrix[x][0] = x\n    for y in range(size_y):\n        matrix[0][y] = y\n    \n    for x in range(1, size_x):\n        for y in range(1, size_y):\n            if str1[x-1] == str2[y-1]:\n                matrix[x][y] = min(\n                    matrix[x-1][y] + 1,\n                    matrix[x-1][y-1],\n                    matrix[x][y-1] + 1\n                )\n            else:\n                matrix[x][y] = min(\n                    matrix[x-1][y] + 1,\n                    matrix[x-1][y-1] + 1,\n                    matrix",
+9,"Write a python function to find the minimum number of rotations required to get the same string.
+
+Write a Python function named `find_Rotations` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",find_Rotations,4,False,"Structured Chain of Thought:\n1. The problem is asking to find the minimum number of rotations required to get the same string.\n2. To solve this problem, we can use a dynamic programming approach.\n3. We will create a 2D array dp where dp[i][j] represents the minimum number of rotations required to get the string from index i to j.\n4. We will initialize the first row and the first column of the dp array.\n5. Then, we will fill up the rest of the dp array using the following relation: dp[i][j] = min(dp[i][j], dp[i][j-1] + 1) for every i >= j and dp[i][j] = min(dp[i][j], dp[i-1][j] + 1) for every i < j.\n6. Finally, we will return the value of dp[n-1][m-1] where n and m are the lengths of the input strings.\n\nPython:","def find_Rotations(s1, s2):\n    n, m = len(s1), len(s2)\n    dp = [[0 for _ in range(m+1)] for _ in range(n+1)]\n    \n    # Initialize the first row and the first column\n    for i in range(n+1):\n        dp[i][0] = i\n    for j in range(m+1):\n        dp[0][j] = j\n    \n    # Fill up the rest of the dp array\n    for i in range(1, n+1):\n        for j in range(1, m+1):\n            if s1[i-1] == s2[j-1]:\n                dp[i][j] = dp[i-1][j-1]\n            else:\n                dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + 1\n    \n    # Return the minimum number of rotations required to get the same string\n    return dp[n-1][m-1]"
+10,"Write a function to get the n smallest items from a dataset.
+
+Write a Python function named `small_nnum` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",small_nnum,0,True,,"def small_nnum(dataset, n):\n    # Step 1: Check if the provided dataset and n are valid\n    if not isinstance(dataset, list) or not isinstance(n, int) or n <= 0:\n        return ""Invalid input""\n\n    # Step 2: Sort the dataset in ascending order\n    dataset.sort()\n\n    # Step 3: Get the first n items from the sorted dataset\n    smallest_items = dataset[:n]\n\n    # Step 4: Return the smallest n items\n    return smallest_items"
+10,"Write a function to get the n smallest items from a dataset.
+
+Write a Python function named `small_nnum` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",small_nnum,1,False,,
+10,"Write a function to get the n smallest items from a dataset.
+
+Write a Python function named `small_nnum` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",small_nnum,2,True,,"def small_nnum(dataset, n):\n    # Step 1: Check if the input is valid\n    if not isinstance(dataset, list) or not isinstance(n, int) or n <= 0:\n        return ""Invalid input""\n\n    # Step 2: Sort the dataset in ascending order\n    dataset.sort()\n\n    # Step 3: Get the first n items from the sorted dataset\n    smallest_items = dataset[:n]\n\n    # Step 4: Return the smallest n items\n    return smallest_items"
+10,"Write a function to get the n smallest items from a dataset.
+
+Write a Python function named `small_nnum` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",small_nnum,3,False,,
+10,"Write a function to get the n smallest items from a dataset.
+
+Write a Python function named `small_nnum` that solves the problem.
+Use a structured chain of thought to explain the solution before giving the code.
+
+Format your response with:
+Structured Chain of Thought:
+<your reasoning here>
+
+Python:
+```python
+<your function here>
+```
+Output nothing else.",small_nnum,4,True,,"def small_nnum(dataset, n):\n    # Step 1: Check if the dataset is empty or if n is 0\n    if not dataset or n == 0:\n        return ""Invalid input""\n\n    # Step 2: Sort the dataset in ascending order\n    dataset.sort()\n\n    # Step 3: Get the first n items from the sorted dataset\n    smallest_items = dataset[:n]\n\n    return smallest_items"
