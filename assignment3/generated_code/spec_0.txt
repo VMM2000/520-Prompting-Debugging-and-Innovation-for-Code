@@ -1,0 +1,54 @@
+### output for problem_0
+Here are 5 unique formal specifications as Python assertions for the `minPath` method:
+
+
+Let `N` be the dimension of the grid, derived as `N = len(grid)`.
+
+
+1.  **The length of the returned path `res` must be exactly `k`.**
+   ```python
+   assert len(res) == k
+   ```
+
+
+2.  **All values in the path `res` must be valid values from the grid, i.e., integers in the range `[1, N*N]` inclusive.**
+   ```python
+   assert all(1 <= val <= N*N for val in res)
+   ```
+
+
+3.  **The first element of the path `res[0]` must be `1`.** This is because the problem states that every integer in `[1, N*N]` appears exactly once in the grid, meaning `1` is always the minimum value available. To achieve a lexicographically smallest path, the first element must be the smallest possible value.
+   ```python
+   assert res[0] == 1
+   ```
+
+
+4.  **For any two consecutive values `res[i]` and `res[i+1]` in the path, the cells containing these values in the grid must be adjacent (share an edge).**
+   ```python
+   assert all(
+      any( # Check if there exist coordinates (r1, c1) for res[i]
+          any( # Check if there exist coordinates (r2, c2) for res[i+1]
+              grid[r1][c1] == res[i] and grid[r2][c2] == res[i+1] and (
+                  abs(r1 - r2) + abs(c1 - c2) == 1
+              )
+              for r2 in range(N) for c2 in range(N)
+          )
+          for r1 in range(N) for c1 in range(N)
+      )
+      for i in range(k - 1)
+   )
+   ```
+
+
+5.  **If `k` is at least 2, the second element of the path `res[1]` must be the smallest value among all direct neighbors of the cell containing `1` in the grid.** This ensures the lexicographical minimality of the path's second element after the initial `1`.
+   ```python
+   assert (k < 2) or (
+      res[1] == min(
+          grid[r_neigh][c_neigh]
+          for r_1 in range(N) for c_1 in range(N) if grid[r_1][c_1] == 1
+          for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)] # Possible neighbor offsets
+          for r_neigh, c_neigh in [(r_1 + dr, c_1 + dc)]
+          if 0 <= r_neigh < N and 0 <= c_neigh < N # Check bounds for neighbor
+      )
+   )
+   ```

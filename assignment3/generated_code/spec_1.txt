@@ -1,0 +1,44 @@
+### output for problem_1
+Here are 5 unique formal specifications as Python assertions for the `numerical_letter_grade` method, where `n` is the input list of floats and `res` is the expected return value (list of strings):
+
+
+1.  **Assertion 1: Output list length and element types.**
+   The output list `res` must have the same length as the input list `n`, and every element in `res` must be a string.
+   ```python
+   assert len(res) == len(n) and all(isinstance(grade, str) for grade in res)
+   ```
+
+
+2.  **Assertion 2: Specific mapping for the highest exact GPA.**
+   If any GPA in the input list `n` is exactly 4.0, its corresponding grade in `res` must be 'A+'.
+   ```python
+   assert all(res[i] == 'A+' for i in range(len(n)) if n[i] == 4.0)
+   ```
+
+
+3.  **Assertion 3: Specific mapping for a typical mid-range GPA interval.**
+   If a GPA is strictly greater than 2.7 and less than or equal to 3.0, its corresponding letter grade must be 'B'. This demonstrates correct handling of open and closed bounds.
+   ```python
+   assert all(res[i] == 'B' for i in range(len(n)) if 2.7 < n[i] <= 3.0)
+   ```
+
+
+4.  **Assertion 4: Specific mapping for the lowest exact GPA.**
+   If any GPA in the input list `n` is exactly 0.0, its corresponding grade in `res` must be 'E'.
+   ```python
+   assert all(res[i] == 'E' for i in range(len(n)) if n[i] == 0.0)
+   ```
+
+
+5.  **Assertion 5: Comprehensive check for a broad range of high-tier grades.**
+   For any GPA strictly greater than 2.7, its corresponding grade must correctly map to 'A+', 'A', 'A-', 'B+', or 'B' according to the specified rules. This assertion checks multiple interconnected grading rules.
+   ```python
+   assert all(
+      (n[i] == 4.0 and res[i] == 'A+') or
+      (3.7 < n[i] < 4.0 and res[i] == 'A') or
+      (3.3 < n[i] <= 3.7 and res[i] == 'A-') or
+      (3.0 < n[i] <= 3.3 and res[i] == 'B+') or
+      (2.7 < n[i] <= 3.0 and res[i] == 'B')
+      for i in range(len(n)) if n[i] > 2.7
+   )
+   ```
